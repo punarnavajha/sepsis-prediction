@@ -1,44 +1,45 @@
-# Early Prediction of Clinical Sepsis using XGBoost
+# Clinical Sepsis Prediction Pipeline
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![ML Framework: XGBoost](https://img.shields.io/badge/ML-XGBoost-green.svg)](https://xgboost.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🏥 Project Overview
-This repository contains a machine learning pipeline designed to predict the onset of sepsis in ICU patients, based on the **PhysioNet/Computing in Cardiology Challenge 2019**. The model utilizes high-frequency physiological vitals to identify risk patterns before clinical deterioration occurs.
+## 📌 Executive Summary
+This project implements an end-to-end machine learning pipeline for the early detection of sepsis, leveraging high-frequency physiological vitals. By identifying subtle patterns in patient deterioration up to 6 hours in advance, this system provides a foundation for real-time clinical decision support (CDS).
 
-## 🚀 Key Features
-* **Temporal Feature Engineering:** Implements a 6-hour sliding window to capture trends in Heart Rate (HR) and Temperature.
-* **Handling Class Imbalance:** Utilizes XGBoost's `scale_pos_weight` to manage the high ratio of non-septic to septic records (approx. 90:10).
-* **Clinical Data Simulation:** Includes a robust synthetic data generator (`generate_data.py`) to ensure pipeline reproducibility and unit testing.
-* **Performance Metric:** Optimized for **AUPRC** (Area Under Precision-Recall Curve), the clinical standard for rare event detection.
+## 🛠️ Technical Architecture
+* **Data Simulation Engine:** Includes `generate_data.py` to create synthetic Patient-Stay-Vectors (PSV) that mimic the PhysioNet 2019 Challenge schema for unit testing and CI/CD pipelines.
+* **Feature Engineering:** Implements temporal rolling averages (6-hour windows) to capture physiological trends rather than static data points.
+* **Imbalance Management:** Utilizes cost-sensitive learning via XGBoost's `scale_pos_weight` to handle the high-sparsity nature of sepsis labels in ICU settings.
+* **Evaluation Metric:** Prioritizes **AUPRC** (Area Under Precision-Recall Curve) to ensure clinical utility by balancing sensitivity with alarm fatigue prevention.
 
-## 🛠️ Installation & Usage
-1. **Clone the repository:**
+
+
+## 🚀 Getting Started
+1. **Clone & Setup:**
    ```bash
    git clone https://github.com/punarnavajha/sepsis-prediction.git
    cd sepsis-prediction
    ```
 
-2. **Generate Synthetic Data:**
+2. **Environment Simulation:**
+   Run the generator to create the local clinical data environment:
    ```bash
    python3 generate_data.py
    ```
 
-3. **Train and Evaluate the Model:**
+3. **Model Execution:**
+   Execute the training and evaluation script:
    ```bash
    python3 sepsis_prediction.py
    ```
 
 ## 📊 Methodology
-The pipeline follows a standard Clinical Data Science workflow:
-1.  **Data Ingestion:** Loading .psv (pipe-separated) clinical records.
-2.  **Preprocessing:** Forward-filling (FFill) missing vitals to simulate real-time EHR bedside monitoring.
-3.  **Modeling:** Training a Gradient Boosted Decision Tree (XGBoost) to classify risk.
+The pipeline is designed for modularity and deployment:
+1.  **Ingestion:** Parses pipe-separated clinical logs.
+2.  **Imputation:** Employs Forward-Fill (FFill) to simulate the reality of bedside monitoring where the last recorded value is assumed valid until a new measurement is taken.
+3.  **Classification:** Gradient Boosted Decision Trees (GBDT) optimized for non-linear physiological relationships.
 
-## 🎓 UCL Application Context
-This project demonstrates core competencies required for the **MSc Health Data Science** at UCL, specifically:
-* Programming for Health Data (Python)
-* Statistics for Health Data (Class imbalance & AUPRC)
-* Data Engineering (EHR data structures)
+
 
 ---
-*Developed by Punarnava Jha*
+*Maintained by Punarnava Jha*
