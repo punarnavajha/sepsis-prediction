@@ -1,0 +1,10 @@
+name: sepsis-prediction
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pandas
+  - numpy
+  - xgboost
+  - scikit-learn
