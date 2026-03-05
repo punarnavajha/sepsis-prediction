@@ -3,10 +3,10 @@
 [![ML Framework: XGBoost](https://img.shields.io/badge/ML-XGBoost-green.svg)](https://xgboost.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 📌 Executive Summary
+##  Executive Summary
 This project implements an end-to-end machine learning pipeline for the early detection of sepsis, leveraging high-frequency physiological vitals. By identifying subtle patterns in patient deterioration up to 6 hours in advance, this system provides a foundation for real-time clinical decision support (CDS).
 
-## 🛠️ Technical Architecture
+##  Technical Architecture
 * **Data Simulation Engine:** Includes `generate_data.py` to create synthetic Patient-Stay-Vectors (PSV) that mimic the PhysioNet 2019 Challenge schema for unit testing and CI/CD pipelines.
 * **Feature Engineering:** Implements temporal rolling averages (6-hour windows) to capture physiological trends rather than static data points.
 * **Imbalance Management:** Utilizes cost-sensitive learning via XGBoost's `scale_pos_weight` to handle the high-sparsity nature of sepsis labels in ICU settings.
@@ -14,7 +14,7 @@ This project implements an end-to-end machine learning pipeline for the early de
 
 
 
-## 🚀 Getting Started
+##  Getting Started
 1. **Clone & Setup:**
    ```bash
    git clone https://github.com/punarnavajha/sepsis-prediction.git
@@ -33,7 +33,7 @@ This project implements an end-to-end machine learning pipeline for the early de
    python3 sepsis_prediction.py
    ```
 
-## 📊 Methodology
+## Methodology
 The pipeline is designed for modularity and deployment:
 1.  **Ingestion:** Parses pipe-separated clinical logs.
 2.  **Imputation:** Employs Forward-Fill (FFill) to simulate the reality of bedside monitoring where the last recorded value is assumed valid until a new measurement is taken.
