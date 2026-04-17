@@ -4,7 +4,7 @@ import glob
 from xgboost import XGBClassifier
 from sklearn.metrics import precision_recall_curve, auc
 
-# Look for the 100 synthetic files we just made
+
 files = glob.glob('sepsis_data/training/*.psv')
 
 def process_data(file_list):
